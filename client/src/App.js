@@ -3,6 +3,8 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import Quadro from './Components/Quadro';
 import './App.css';
 import logo from './logo.png'
+import { ColorInput, Interact, SearchInput, SpotifyLogin } from './Components/style';
+import MusicList from './Components/MusicList';
 
 
 
@@ -105,50 +107,32 @@ class App extends Component {
 
   render() {
     if (this.state.loading) {
-      return <h1>Loading...</h1>
+      return (
+        <SpotifyLogin>
+          <a href='http://localhost:8888' target="_blank" > Login to Spotify </a>
+        </SpotifyLogin>
+      )
     }
-    
     return (
       <div className="App">
         <Quadro info={this.state.quadro} color={this.state.color} svg={this.state.svg} />
-        <div className="inputs-list">
-          <img src={logo} width="600" />
-
+        <Interact>
+          <img src={logo}/>
           <div className="music-wrap">
-        <a href='http://localhost:8888' target="_blank" > Login to Spotify </a>
             <div className="texts">
-              <div className="text-input">
+              <SearchInput>
                 <h2>Pesquise a música desejada: </h2>
-                <input type="text" onChange={this.handleChange} value={this.state.input} />
-              </div>
-              <div className="color-input">
+                <input type="text" onChange={this.handleChange} value={this.state.input}placeholder="Digite a música" />
+              </SearchInput>
+              <ColorInput>
                   <h2>Selecione a cor:</h2>
-                  <input className="color-change" onChange={({ target }) => this.setState({color: target.value})} type="color" value={this.state.color}/>
-              </div>
+                  <input onChange={({ target }) => this.setState({color: target.value})} type="color" value={this.state.color}/>
+              </ColorInput>
             </div>
-            
-            <div className="music-list">
-              {
-                this.state.search.map(el => {
-                  const artists = 
-                  (el.artists.length >= 2)
-                  ? el.artists.reduce((acc, ele) => `${acc.name}, ${ele.name}`)
-                  : el.artists[0].name;
-                  return (
-                    <div className="music" onClick={() => this.handleClick(el.name, artists, el.album.images[0].url, el.uri )}>
-                    <img src={el.album.images[1].url} />
-                      <div>
-                        <h3>{el.name}</h3>
-                        <h5>{artists}</h5>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </div>
+            <MusicList search={this.state.search} handleClick={this.handleClick}/>
             
           </div>
-        </div>
+        </Interact>
 
       </div>
     );
