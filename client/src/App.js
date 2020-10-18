@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Quadro from './Components/Quadro';
 import './App.css';
+import logo from './logo.png'
 
 
 
@@ -111,26 +112,41 @@ class App extends Component {
       <div className="App">
         <Quadro info={this.state.quadro} color={this.state.color} svg={this.state.svg} />
         <div className="inputs-list">
-          <input onChange={({ target }) => this.setState({color: target.value})} type="color" value={this.state.color}/>
-          <a href='http://localhost:8888' target="_blank" > Login to Spotify </a>
-          <div>
-            <input type="text" onChange={this.handleChange} value={this.state.input} />
-            <h1>Lista de musicas: </h1>
-            {
-              this.state.search.map(el => {
-                const artists = 
-                (el.artists.length >= 2)
-                ? el.artists.reduce((acc, ele) => `${acc.name}, ${ele.name}`)
-                : el.artists[0].name;
-                return (
-                  <div onClick={() => this.handleClick(el.name, artists, el.album.images[0].url, el.uri )}>
-                    <h3>{el.name}</h3>
-                    <h5>{artists}</h5>
+          <img src={logo} width="600" />
+
+          <div className="music-wrap">
+        <a href='http://localhost:8888' target="_blank" > Login to Spotify </a>
+            <div className="texts">
+              <div className="text-input">
+                <h2>Pesquise a música desejada: </h2>
+                <input type="text" onChange={this.handleChange} value={this.state.input} />
+              </div>
+              <div className="color-input">
+                  <h2>Selecione a cor:</h2>
+                  <input className="color-change" onChange={({ target }) => this.setState({color: target.value})} type="color" value={this.state.color}/>
+              </div>
+            </div>
+            
+            <div className="music-list">
+              {
+                this.state.search.map(el => {
+                  const artists = 
+                  (el.artists.length >= 2)
+                  ? el.artists.reduce((acc, ele) => `${acc.name}, ${ele.name}`)
+                  : el.artists[0].name;
+                  return (
+                    <div className="music" onClick={() => this.handleClick(el.name, artists, el.album.images[0].url, el.uri )}>
                     <img src={el.album.images[1].url} />
-                  </div>
-                )
-              })
-            }
+                      <div>
+                        <h3>{el.name}</h3>
+                        <h5>{artists}</h5>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+            
           </div>
         </div>
 
