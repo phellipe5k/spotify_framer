@@ -205,6 +205,8 @@ export const MusicsList = styled.div`
     margin: 5px 0;
     transition: 500ms;
     background-color: #1DB954;
+    height: 55px;
+    font-size: 10pt;
 
     &:hover {
     transition: 500ms;
@@ -286,9 +288,8 @@ export const SpotifyLogin = styled.div`
   padding: 15px;
   text-decoration: none;
   color: white;
-  border-radius: 30px;
   margin: 20px 0 ;
   text-align: center;
-  width: 20%;
+  width: 100%;
   }
 `;
