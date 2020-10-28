@@ -117,6 +117,7 @@ class App extends Component {
       <div className="App">
         <Quadro info={this.state.quadro} color={this.state.color} svg={this.state.svg} />
         <Interact>
+          <h5 style={{textAlign:'center', color: this.state.color}}>Luana Portilho, EU TE AMOO !!!</h5>
           <img src={logo}/>
           <div className="music-wrap">
             <div className="texts">
