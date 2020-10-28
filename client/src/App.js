@@ -109,7 +109,7 @@ class App extends Component {
     if (this.state.loading) {
       return (
         <SpotifyLogin>
-          <a href='https://spotify-frame-api.herokuapp.com/' target="_blank" > Login to Spotify </a>
+          <a href='https://spotify-framer-api.herokuapp.com/login' target="_blank" > Login to Spotify </a>
         </SpotifyLogin>
       )
     }
